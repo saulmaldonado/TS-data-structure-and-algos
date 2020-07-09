@@ -1,7 +1,7 @@
-class NumberArray {
+class BaseArray<T = any> {
   public length: number;
 
-  private items: Record<number, number | undefined> = {};
+  protected items: Record<number, T | undefined> = {};
 
   constructor(size?: number | undefined) {
     this.length = size ?? 0;
@@ -23,12 +23,12 @@ class NumberArray {
     console.log(this.toString());
   }
 
-  public append(item: number): void {
+  public append(item: T): void {
     this.items[this.length] = item;
     this.length++;
   }
 
-  public insertAt(item: number, index: number): void {
+  public insertAt(item: T, index: number): void {
     for (let i = this.length; i > index; i--) {
       this.items[i] = this.items[i - 1];
     }
@@ -51,7 +51,7 @@ class NumberArray {
     this.length--;
   }
 
-  public indexOf(item: number): number {
+  public indexOf(item: T): number {
     for (let i = 0; i < this.length; i++) {
       if (item === this.items[i]) {
         return i;
@@ -59,7 +59,12 @@ class NumberArray {
     }
     return -1;
   }
+}
 
+class NumberArray extends BaseArray<number> {
+  constructor(size: number) {
+    super(size);
+  }
   public max(): number {
     let maxNumber = Number.MIN_SAFE_INTEGER;
     let maxNumberResult: number | undefined;
