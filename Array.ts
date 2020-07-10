@@ -6,7 +6,6 @@ class BaseArray<T = any> {
   constructor(size?: number | undefined) {
     this.length = size ?? 0;
   }
-
   public toString(): string {
     let string = '';
     for (let i = 0; i < this.length; i++) {
@@ -58,6 +57,15 @@ class BaseArray<T = any> {
       }
     }
     return -1;
+  }
+
+  public includes(item: T): boolean {
+    for (let i = 0; i < this.length; i++) {
+      if (item === this.items[i]) {
+        return true;
+      }
+    }
+    return false;
   }
 }
 
