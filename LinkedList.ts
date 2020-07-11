@@ -146,6 +146,32 @@ class LinkedList<T = any> {
     this.head = prevNode;
   }
 
+  // implement algorithm to return the kth node from the end
+  getKthFromTheEnd(k: number): Node | undefined {
+    this.isEmpty();
+
+    // use to pointers, one for current node and one for the end
+    let currentNode: Node = this.head!;
+    let end: Node = this.head!;
+
+    // move end k - 1 nodes through the list
+    while (k - 1 > 0) {
+      if (end.next === null) {
+        // if the list is shorter than k - 1, there is no kth node from the end
+        return;
+      }
+      end = end.next;
+      k--;
+    }
+    // once k is 0 move both pointers until end.next is null
+    while (end.next !== null) {
+      currentNode = currentNode.next!;
+      end = end.next;
+    }
+    // currentNode is the kth node from the end
+    return currentNode;
+  }
+
   print() {
     this.isEmpty();
 
