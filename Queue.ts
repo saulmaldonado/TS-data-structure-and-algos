@@ -1,6 +1,6 @@
 class Queue<T = any> {
   protected items: Array<T | null> = [];
-  protected size: number;
+  readonly size: number;
   protected headIndex: number = 0;
   protected tailIndex: number = 0;
 
@@ -38,5 +38,24 @@ class Queue<T = any> {
       if (this.items[i] === null) return false;
     }
     return true;
+  }
+}
+
+class PriorityQueue extends Queue<number> {
+  constructor(size: number) {
+    super(size);
+  }
+
+  enqueue(item: number) {
+    if (this.items.length === this.size) throw new Error('Queue is full');
+    if (this.items.length < 1) this.items[0] = item;
+    for (let i = this.items.length - 1; i >= 0; i--) {
+      if (this.items[i]! > item) {
+        this.items[i + 1] = this.items[i];
+      } else {
+        this.items[i] = item;
+        break;
+      }
+    }
   }
 }
