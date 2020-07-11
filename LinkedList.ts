@@ -59,6 +59,7 @@ class LinkedList<T = any> {
     }
 
     this.tail = prevNode;
+    prevNode!.next = null;
 
     if (this.head === this.tail) this.head = prevNode;
   }
@@ -121,6 +122,38 @@ class LinkedList<T = any> {
     }
 
     return array;
+  }
+
+  reversed(): void {
+    this.isEmpty();
+    let prevNode = this.head!;
+    let currentNode = this.head!.next;
+
+    while (currentNode != null) {
+      // set pointer to next node
+      let nextNode = currentNode.next;
+      // link currentNode to its previous node
+      currentNode.next = prevNode;
+
+      //shift the pointers to the next node
+      prevNode = currentNode;
+      currentNode = nextNode;
+    }
+
+    // assign tail to the first node
+    this.tail = this.head;
+    this.tail!.next = null;
+    this.head = prevNode;
+  }
+
+  print() {
+    this.isEmpty();
+
+    let currentNode: Node | null = this.head!;
+    while (currentNode !== null) {
+      console.log(currentNode.value);
+      currentNode = currentNode.next;
+    }
   }
 
   private isEmpty() {
