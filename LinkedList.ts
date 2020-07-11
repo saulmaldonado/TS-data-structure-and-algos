@@ -119,6 +119,7 @@ class LinkedList<T = any> {
     while (currentNode !== null) {
       array[index] = currentNode.value;
       currentNode = currentNode.next;
+      index++;
     }
 
     return array;
@@ -170,6 +171,28 @@ class LinkedList<T = any> {
     }
     // currentNode is the kth node from the end
     return currentNode;
+  }
+
+  // return the middle node of the list. If the list size is even, return both of the middle nodes
+  middle(): Node | [Node, Node] {
+    this.isEmpty();
+    const array = [];
+    let currentNode: Node | null = this.head!;
+    let index = 0;
+
+    //iterate through the list and store the nodes in an array
+    while (currentNode !== null) {
+      array[index] = currentNode;
+      currentNode = currentNode.next;
+      index++;
+    }
+
+    //using the array length, determine the middle nodes
+    if (array.length % 2 === 0) {
+      return [array[array.length / 2], array[array.length / 2 - 1]];
+    } else {
+      return array[Math.floor(array.length / 2)];
+    }
   }
 
   print() {
