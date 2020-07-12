@@ -47,17 +47,24 @@ class Tree {
     return false;
   }
 
-  traversePreorder(root: Node | null = this.root) {
+  traversePreOrder(root: Node | null = this.root) {
     if (!root) return;
     console.log(root.value);
-    this.traversePreorder(root.leftChild);
-    this.traversePreorder(root.rightChild);
+    this.traversePreOrder(root.leftChild);
+    this.traversePreOrder(root.rightChild);
   }
 
   traverseInOrder(root: Node | null = this.root) {
     if (!root) return;
-    this.traversePreorder(root.leftChild);
+    this.traverseInOrder(root.leftChild);
     console.log(root.value);
-    this.traversePreorder(root.rightChild);
+    this.traverseInOrder(root.rightChild);
+  }
+
+  traversePostOrder(root: Node | null = this.root) {
+    if (!root) return;
+    this.traversePostOrder(root.rightChild);
+    this.traversePostOrder(root.leftChild);
+    console.log(root.value);
   }
 }
