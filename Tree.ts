@@ -80,4 +80,14 @@ class Tree {
 
     return 1 + Math.max(this.height(root.rightChild), this.height(root.leftChild));
   }
+
+  min(root: Node | null = this.root): number {
+    if (!root) return Number.MAX_SAFE_INTEGER;
+    if (root.leftChild === null && root.rightChild === null) return root.value;
+
+    const left = this.min(root.leftChild);
+    const right = this.min(root.rightChild);
+
+    return Math.min(Math.min(left, right), root.value);
+  }
 }
