@@ -90,4 +90,25 @@ class Tree {
 
     return Math.min(Math.min(left, right), root.value);
   }
+
+  static compareTrees(first: Tree, second: Tree): boolean {
+    return this.equals(first.root, second.root);
+  }
+
+  private static equals(first: Node | null, second: Node | null): boolean {
+    //base case. both nodes are null, reached end of tree
+    if (first === null && second === null) return true;
+
+    // if both nodes exist, compare both. Call method recursively on its child nodes
+    if (first !== null && second !== null) {
+      return (
+        first.value === second.value &&
+        this.equals(first.leftChild, second.leftChild) &&
+        this.equals(first.rightChild, second.rightChild)
+      );
+    }
+
+    // one valid node and one null node
+    return false;
+  }
 }
