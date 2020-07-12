@@ -91,6 +91,16 @@ class Tree {
     return Math.min(Math.min(left, right), root.value);
   }
 
+  max(root: Node | null = this.root): number {
+    if (!root) return Number.MIN_SAFE_INTEGER;
+    if (root.leftChild === null && root.rightChild === null) return root.value;
+
+    const left = this.max(root.leftChild);
+    const right = this.max(root.rightChild);
+
+    return Math.max(Math.max(left, right), root.value);
+  }
+
   static compareTrees(first: Tree, second: Tree): boolean {
     return this.equals(first.root, second.root);
   }
