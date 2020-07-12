@@ -67,4 +67,17 @@ class Tree {
     this.traversePostOrder(root.leftChild);
     console.log(root.value);
   }
+
+  height(root: Node | null = this.root): number {
+    // empty tree
+    if (root === null) {
+      return 0;
+    }
+
+    if (root.leftChild === null && root.rightChild === null) {
+      return 0;
+    }
+
+    return 1 + Math.max(this.height(root.rightChild), this.height(root.leftChild));
+  }
 }
