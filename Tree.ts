@@ -53,4 +53,11 @@ class Tree {
     this.traversePreorder(root.leftChild);
     this.traversePreorder(root.rightChild);
   }
+
+  traverseInOrder(root: Node | null = this.root) {
+    if (!root) return;
+    this.traversePreorder(root.leftChild);
+    console.log(root.value);
+    this.traversePreorder(root.rightChild);
+  }
 }
