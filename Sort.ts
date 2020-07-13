@@ -34,4 +34,20 @@ class Sort {
     }
     return arr;
   }
+
+  static InsertionSort(arr: number[]) {
+    if (arr.length < 2) return arr;
+    for (let i = 1; i < arr.length; i++) {
+      let current = arr[i];
+
+      for (let j = i - 1; j >= 0; j--) {
+        if (arr[j] > current) {
+          arr[j + 1] = arr[j];
+        } else if (arr[j] <= current) {
+          arr[j + 1] = current;
+          break;
+        }
+      }
+    }
+  }
 }
