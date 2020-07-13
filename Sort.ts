@@ -72,6 +72,7 @@ class Sort {
       } else {
         result.push(right[j]);
         j++;
+        L;
       }
     }
     while (i < left.length) {
@@ -84,5 +85,26 @@ class Sort {
     }
 
     return result;
+  }
+
+  static QuickSort(
+    arr: number[],
+    start: number = 0,
+    end: number = arr.length - 1,
+  ) {
+    if (start >= end) return;
+
+    let pivot = arr[end];
+
+    let b = start - 1;
+    for (let i = start; i <= end; i++) {
+      if (arr[i] <= pivot) {
+        let temp = arr[i];
+        arr[i] = arr[++b];
+        arr[b] = temp;
+      }
+    }
+    Sort.QuickSort(arr, start, b - 1);
+    Sort.QuickSort(arr, b + 1, end);
   }
 }
