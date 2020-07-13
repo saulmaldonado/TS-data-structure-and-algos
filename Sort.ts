@@ -107,4 +107,23 @@ class Sort {
     Sort.QuickSort(arr, start, b - 1);
     Sort.QuickSort(arr, b + 1, end);
   }
+
+  static CountingSort(arr: number[]) {
+    let countingArr = [];
+
+    for (let i = 0; i < arr.length; i++) {
+      if (!countingArr[arr[i]]) {
+        countingArr[arr[i]] = 0;
+      }
+      countingArr[arr[i]]++;
+    }
+
+    let j = 0;
+    for (let i = 0; i < countingArr.length; i++) {
+      while (countingArr[i] > 0) {
+        arr[j++] = i;
+        countingArr[i]--;
+      }
+    }
+  }
 }
