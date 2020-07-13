@@ -1,4 +1,5 @@
 class Sort {
+  // worst case O^2
   static BubbleSort(arr: number[]): number[] {
     if (arr.length < 2) return arr;
     let isSorted: boolean;
@@ -16,6 +17,21 @@ class Sort {
       if (isSorted) break;
     }
 
+    return arr;
+  }
+
+  static SelectionSort(arr: number[]) {
+    for (let i = 0; i < arr.length; i++) {
+      let minIndex = i;
+      for (let j = i; j < arr.length; j++) {
+        if (arr[minIndex] > arr[j]) {
+          minIndex = j;
+        }
+      }
+      let smaller = arr[minIndex];
+      arr[minIndex] = arr[i];
+      arr[i] = smaller;
+    }
     return arr;
   }
 }
