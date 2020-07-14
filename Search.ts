@@ -93,4 +93,17 @@ class Search {
     }
     return -1;
   }
+
+  static ExponentialSearch(arr: number[], item: number) {
+    let bound = 1;
+    while (arr[bound] < item) {
+      bound *= 2;
+    }
+
+    // last bound
+    let left = bound / 2;
+    let right = Math.min(bound, arr.length - 1);
+
+    return Search.BinarySearchRecursive(arr, item, left, right);
+  }
 }
