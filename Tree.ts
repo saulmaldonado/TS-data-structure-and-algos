@@ -1,7 +1,7 @@
-class Node {
+class TSNode {
   value: number;
-  leftChild: Node | null = null;
-  rightChild: Node | null = null;
+  leftChild: TSNode | null = null;
+  rightChild: TSNode | null = null;
 
   constructor(value: number) {
     this.value = value;
@@ -9,31 +9,31 @@ class Node {
 }
 
 class Tree {
-  root: Node | null = null;
+  root: TSNode | null = null;
 
   insert(value: number) {
-    if (!this.root) return (this.root = new Node(value));
+    if (!this.root) return (this.root = new TSNode(value));
 
-    let currentNode: Node | null = this.root;
+    let currentNode: TSNode | null = this.root;
 
     while (currentNode !== null) {
       if (value < currentNode.value) {
         if (currentNode.leftChild === null) {
-          return (currentNode.leftChild = new Node(value));
+          return (currentNode.leftChild = new TSNode(value));
         }
         currentNode = currentNode.leftChild;
       } else {
         if (currentNode.rightChild === null) {
-          return (currentNode.rightChild = new Node(value));
+          return (currentNode.rightChild = new TSNode(value));
         }
         currentNode = currentNode.rightChild;
       }
     }
-    return (currentNode = new Node(value));
+    return (currentNode = new TSNode(value));
   }
 
   find(value: number) {
-    let currentNode: Node | null = this.root;
+    let currentNode: TSNode | null = this.root;
 
     while (currentNode !== null) {
       if (currentNode.value === value) {
@@ -47,28 +47,28 @@ class Tree {
     return false;
   }
 
-  traversePreOrder(root: Node | null = this.root) {
+  traversePreOrder(root: TSNode | null = this.root) {
     if (!root) return;
     console.log(root.value);
     this.traversePreOrder(root.leftChild);
     this.traversePreOrder(root.rightChild);
   }
 
-  traverseInOrder(root: Node | null = this.root) {
+  traverseInOrder(root: TSNode | null = this.root) {
     if (!root) return;
     this.traverseInOrder(root.leftChild);
     console.log(root.value);
     this.traverseInOrder(root.rightChild);
   }
 
-  traversePostOrder(root: Node | null = this.root) {
+  traversePostOrder(root: TSNode | null = this.root) {
     if (!root) return;
     this.traversePostOrder(root.rightChild);
     this.traversePostOrder(root.leftChild);
     console.log(root.value);
   }
 
-  height(root: Node | null = this.root): number {
+  height(root: TSNode | null = this.root): number {
     // empty tree
     if (root === null) {
       return 0;
@@ -81,7 +81,7 @@ class Tree {
     return 1 + Math.max(this.height(root.rightChild), this.height(root.leftChild));
   }
 
-  min(root: Node | null = this.root): number {
+  min(root: TSNode | null = this.root): number {
     if (!root) return Number.MAX_SAFE_INTEGER;
     if (root.leftChild === null && root.rightChild === null) return root.value;
 
@@ -91,7 +91,7 @@ class Tree {
     return Math.min(Math.min(left, right), root.value);
   }
 
-  max(root: Node | null = this.root): number {
+  max(root: TSNode | null = this.root): number {
     if (!root) return Number.MIN_SAFE_INTEGER;
     if (root.leftChild === null && root.rightChild === null) return root.value;
 
@@ -105,7 +105,7 @@ class Tree {
     return this.equals(first.root, second.root);
   }
 
-  private static equals(first: Node | null, second: Node | null): boolean {
+  private static equals(first: TSNode | null, second: TSNode | null): boolean {
     //base case. both nodes are null, reached end of tree
     if (first === null && second === null) return true;
 

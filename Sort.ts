@@ -72,7 +72,6 @@ class Sort {
       } else {
         result.push(right[j]);
         j++;
-        L;
       }
     }
     while (i < left.length) {
@@ -87,11 +86,7 @@ class Sort {
     return result;
   }
 
-  static QuickSort(
-    arr: number[],
-    start: number = 0,
-    end: number = arr.length - 1,
-  ) {
+  static QuickSort(arr: number[], start: number = 0, end: number = arr.length - 1) {
     if (start >= end) return;
 
     let pivot = arr[end];

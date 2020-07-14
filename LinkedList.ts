@@ -1,14 +1,14 @@
-class Node<T = any> {
+class LinkedListNode<T = any> {
   public value: T;
-  public next: Node | null = null;
+  public next: LinkedListNode | null = null;
   constructor(value: T) {
     this.value = value;
   }
 }
 
 class LinkedList<T = any> {
-  private head: Node | null = null;
-  private tail: Node | null = null;
+  private head: LinkedListNode | null = null;
+  private tail: LinkedListNode | null = null;
 
   getFirst(): T {
     this.isEmpty();
@@ -21,7 +21,7 @@ class LinkedList<T = any> {
   }
 
   addLast(value: T): void {
-    const newNode = new Node(value);
+    const newNode = new LinkedListNode(value);
 
     if (this.head === null) {
       this.head = this.tail = newNode;
@@ -32,7 +32,7 @@ class LinkedList<T = any> {
   }
 
   addFirst(value: T): void {
-    const newNode = new Node(value);
+    const newNode = new LinkedListNode(value);
 
     if (this.head === null) {
       this.head = this.tail = newNode;
@@ -50,8 +50,8 @@ class LinkedList<T = any> {
   removeLast(): void {
     this.isEmpty();
 
-    let prevNode: Node | null = null;
-    let currentNode: Node = this.head!;
+    let prevNode: LinkedListNode | null = null;
+    let currentNode: LinkedListNode = this.head!;
 
     while (currentNode.next !== null) {
       prevNode = currentNode;
@@ -86,7 +86,7 @@ class LinkedList<T = any> {
   indexOf(value: T): number {
     if (this.head === null) return -1;
 
-    let currentNode: Node | null = this.head;
+    let currentNode: LinkedListNode | null = this.head;
     let index: number = 0;
 
     while (currentNode !== null) {
@@ -102,7 +102,7 @@ class LinkedList<T = any> {
       return false;
     }
 
-    let currentNode: Node | null = this.head;
+    let currentNode: LinkedListNode | null = this.head;
 
     while (currentNode !== null) {
       if (currentNode.value === value) return true;
@@ -148,12 +148,12 @@ class LinkedList<T = any> {
   }
 
   // implement algorithm to return the kth node from the end
-  getKthFromTheEnd(k: number): Node | undefined {
+  getKthFromTheEnd(k: number): LinkedListNode | undefined {
     this.isEmpty();
 
     // use to pointers, one for current node and one for the end
-    let currentNode: Node = this.head!;
-    let end: Node = this.head!;
+    let currentNode: LinkedListNode = this.head!;
+    let end: LinkedListNode = this.head!;
 
     // move end k - 1 nodes through the list
     while (k - 1 > 0) {
@@ -174,10 +174,10 @@ class LinkedList<T = any> {
   }
 
   // return the middle node of the list. If the list size is even, return both of the middle nodes
-  middle(): Node | [Node, Node] {
+  middle(): LinkedListNode | [LinkedListNode, LinkedListNode] {
     this.isEmpty();
     const array = [];
-    let currentNode: Node | null = this.head!;
+    let currentNode: LinkedListNode | null = this.head!;
     let index = 0;
 
     //iterate through the list and store the nodes in an array
@@ -198,9 +198,8 @@ class LinkedList<T = any> {
   print() {
     this.isEmpty();
 
-    let currentNode: Node | null = this.head!;
+    let currentNode: LinkedListNode | null = this.head!;
     while (currentNode !== null) {
-      console.log(currentNode.value);
       currentNode = currentNode.next;
     }
   }
