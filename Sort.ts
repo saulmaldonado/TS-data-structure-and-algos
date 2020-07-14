@@ -126,4 +126,29 @@ class Sort {
       }
     }
   }
+
+  static BucketSort(arr: number[], numOfBuckets: number) {
+    let buckets = [];
+    for (let i = 0; i < numOfBuckets; i++) {
+      buckets[i] = [];
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+      if (!buckets[Math.floor(arr[i] / numOfBuckets)]) {
+        buckets[Math.floor(arr[i] / numOfBuckets)] = new Array();
+      }
+
+      buckets[Math.floor(arr[i] / numOfBuckets)].push(arr[i]);
+    }
+
+    let k = 0;
+    for (let i = 0; i < buckets.length; i++) {
+      if (buckets[i]) {
+        Sort.CountingSort(buckets[i]);
+        for (let j = 0; j < buckets[i].length; j++) {
+          arr[k++] = buckets[i][j];
+        }
+      }
+    }
+  }
 }
