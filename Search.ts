@@ -74,4 +74,23 @@ class Search {
 
     return Search.TernarySearch(arr, item, mid1 + 1, mid2 - 1);
   }
+
+  static JumpSearch(arr: number[], item: number) {
+    let blockSize = Math.floor(Math.sqrt(arr.length));
+    let start = 0;
+    let next = blockSize;
+
+    while (arr[next - 1] < item) {
+      start = next;
+      if (start >= arr.length) break;
+      next += blockSize;
+      if (next > arr.length) next = arr.length;
+    }
+    for (let i = start; i < next; i++) {
+      if (arr[i] == item) {
+        return i;
+      }
+    }
+    return -1;
+  }
 }
