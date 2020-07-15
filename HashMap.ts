@@ -3,6 +3,16 @@ class HashMap<T = any> {
   private prime: number = 31;
   constructor(size: number = 53) {
     this.keyMap = new Array(size);
+
+    return new Proxy(this, {
+      get(target, prop): T | undefined {
+        return target.get(prop.toString());
+      },
+      set(target, prop, value): boolean {
+        target.set(prop.toString(), value);
+        return true;
+      },
+    });
   }
 
   private hash(key: string) {
