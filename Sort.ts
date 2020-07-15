@@ -146,4 +146,23 @@ class Sort {
       }
     }
   }
+
+  static RadixSort(arr: number[]) {
+    let maxDigits: number = Number.MIN_SAFE_INTEGER;
+
+    for (let i = 0; i < arr.length; i++) {
+      maxDigits = Math.max(
+        maxDigits,
+        Math.floor(Math.log10(arr[i])) + 1 === 0 ? 1 : Math.floor(Math.log10(arr[i])) + 1
+      );
+    }
+
+    for (let i = 0; i < maxDigits; i++) {
+      let buckets: number[][] = Array.from({ length: 10 }, () => []);
+      for (let j = 0; j < arr.length; j++) {
+        buckets[Math.floor(arr[j] / Math.pow(10, i)) % 10].push(arr[j]);
+      }
+      arr = ([] as number[]).concat(...buckets);
+    }
+  }
 }
