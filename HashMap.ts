@@ -5,7 +5,10 @@ class HashMap<T = any> {
     this.keyMap = new Array(size);
 
     return new Proxy(this, {
-      get(target, prop): T | undefined {
+      get(target, prop): T | undefined | Array<Array<[string, T]>> {
+        if (prop === 'keyMap') {
+          return target.keyMap;
+        }
         return target.get(prop.toString());
       },
       set(target, prop, value): boolean {
@@ -35,5 +38,29 @@ class HashMap<T = any> {
       }
     }
     return;
+  }
+
+  static values<T = any>(hashMap: HashMap): T[] {
+    const values = [];
+    for (let i = 0; i < hashMap.keyMap.length; i++) {
+      if (hashMap.keyMap[i]) {
+        for (let j = 0; j < hashMap.keyMap[i].length; j++) {
+          values.push(hashMap.keyMap[i][j][1]);
+        }
+      }
+    }
+    return values;
+  }
+
+  static keys(hashMap: HashMap): string[] {
+    const keys = [];
+    for (let i = 0; i < hashMap.keyMap.length; i++) {
+      if (hashMap.keyMap[i]) {
+        for (let j = 0; j < hashMap.keyMap[i].length; j++) {
+          keys.push(hashMap.keyMap[i][j][0]);
+        }
+      }
+    }
+    return keys;
   }
 }
